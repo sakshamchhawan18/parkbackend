@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Parking Backend | Vehicle</title>
+</head>
+<body>
+    <style>
+    body {
+        background-color: antiquewhite;
+        margin: 0;
+        padding: 0;
+    }
+    header {background-color:coral;
+            padding: 20px;
+            color: #fff;
+            text-align: center;}
+            h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    table {
+        margin: 20px auto;
+        border-collapse: collapse;
+        width: 80%;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        
+    }
+
+    th {
+        background-color: #60bce7;
+        font-weight: bold;
+    }
+
+    a {
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+    }
+
+    fieldset {
+        border: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .addvehicle_form {
+        display: block;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 750px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        align-items: center;padding: 30px;
+    }
+
+    legend {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    
+
+    input[type="text"],
+    select {
+        width: 80%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    input[type="submit"] {
+        display: block;
+        width: 70%;
+        padding: 10px;
+        background-color:coral;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+
+    a.button {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            background-color:coral;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        a.button:hover {
+            background-color: rgb(84, 138, 3);
+        }
+   
+
+    input[type="submit"]:hover {
+        background-color: rgb(84, 138, 3);
+    
+    }
+    .log_table{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,0%);
+    }
+</style>
+
+
+<header>
+    <h1>Parking Backend | Vehicle</h1>
+</header>
+<table>
+    <tr>
+        <td><a href="/" class="button">/home</a></td>
+        <td><a href="/auth" class="button">/authentification</a></td>
+        <td><a href="/v1/logout" class="button">/authentification/logout</a></td>
+        <td><a href="/vehicle" class="button">/vehicle</a></td>
+        <td><a href="/log" class="button">/logbook</a></td>
+    </tr>
+</table>
+<form action="/v1/addVehicle/" method="post" class="addvehicle_form">
+    <fieldset>
+        <legend>Add Vehicle</legend>
+        <input type="text" id="vehicle-number" name="vehicleNumber"required placeholder="Vehicle Number"><br/><br/>
+        <label>
+            Parking Spot ID -
+            <select name="parkingSpotId">
+                <% for(p of parkingSpotId){ %>
+                    <option value="<%= p.parkingSpotId %>"><%= p.parkingSpotId %></option>
+                <% } %>
+
+            </select>
+        </label>
+        <input type="submit" value="Park vehicle" placeholder="Park Vehicle">
+
+    </fieldset>
+</form>
+<table class="log_table">
+    <tr>
+        <th>vehicleId</th>
+        <th>vehicleNumber</th>
+        <th>userId</th>
+        <th>delete</th>
+    </tr>
+    <% for(v of vehicle){ %>
+        <tr>
+            <td><%= v.vehicleId %></td>
+            <td><%= v.vehicleNumber %></td>
+            <td><%= v.userId %></td>
+            <td>
+                <form action="/v1/deleteVehicle/" method="post" class="deletevehicle_form">
+                    <input type="hidden" name="vehicleId" value="<%= v.vehicleId %>">
+                    <input type="submit" value="Check Out">
+                </form>
+            </td>
+        </tr>
+    <% } %>
+</table>
+</body>
+<script>
+
+</script>
+</html>
