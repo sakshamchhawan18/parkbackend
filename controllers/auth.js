@@ -50,7 +50,7 @@ const register = async (req, res) => {
         "userId": user.userId,
         "mobileNumber": user.mobileNumber,
         "name": user.name
-    }, process.env.ACCESS_TOKEN_SECRET);
+    },  process.env.SECRET);
     res.cookie('token', token, {
         httpOnly: true
     })
