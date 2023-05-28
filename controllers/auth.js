@@ -19,7 +19,7 @@ const login = async (req, res, next) => {
                 "userId": user.userId,
                 "mobileNumber": user.mobileNumber,
                 "name": user.name
-            }, process.env.ACCESS_TOKEN_SECRET);
+            }, process.env.SECRET);
             res.cookie('token', token, {
                 httpOnly: true
             })
